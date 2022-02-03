@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="./style.css" type="text/css" media="all" />
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+
+    
+    <title>Document</title>
+</head>
+<body>
+    <h1>インターセクションオブザーバー</h1>
+
+    <div class="sec1"></div>
+
+    <div class="sec2"></div>
+
+    <div class="sec3 observerTarget"></div>
+    <div class="sec4 observerTarget"></div>
+
+
+    
+  
+</body>
+
+<script>
+
+    const options = {
+        // root: document.querySelector("#observerArea"),ビューポートにする
+        rootMargin: "10px",
+        threshold: 0.5//5割見えたら反応
+    };
+
+    const observer = new IntersectionObserver(test_function, options);//監視者作成
+
+    function test_function(){
+        console.log("test");
+    }
+
+
+    var targets = document.querySelectorAll('.observerTarget');
+    
+
+    targets.forEach(_t => {
+        observer.observe(_t);
+        //console.log(box)
+    });
+
+    
+
+    
+</script>
+
+
+</html>
