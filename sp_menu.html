@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="./style.css" type="text/css" media="all" />
+    <script
+			  src="https://code.jquery.com/jquery-3.6.0.js"
+			  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			  crossorigin="anonymous"></script>
+
+    
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="test">テスト1</div>
+    <div class="test">テスト2</div>
+
+    <div class="js_test">
+        テストです
+        <img src="https://dol.ismcdn.jp/mwimgs/7/1/1080m/img_71c53c1d81500a1cf73a4f543e72413f27838.jpg" alt="">
+    </div>
+
+    <div class="js_sp_menu">
+
+        <div class="menu_icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+
+</body>
+
+<script>
+
+/*sp_menu*/
+
+/*---------------------------*/
+/*スマホメニュー開閉*/
+/*---------------------------*/
+$(function() {
+    
+    $('.js_sp_menu').on('click',function() {
+       
+        
+        if($('.header_inner').hasClass('close') ){
+            //menuが閉じている場合、開く
+            $('.menu_icon').addClass('sp_menu_active');
+            $(this).find('.menu_text').text('CLOSE');
+            $('.header_inner').removeClass('close');
+            let scrollPosi = $(window).scrollTop();
+            $('body').attr('data-scroll',scrollPosi);
+
+
+            scrollPosi = -scrollPosi;
+            //背景スクロールを禁止に
+            $('body').addClass('on');
+            $('body').css('top', scrollPosi);
+            $('main').css('position', "fixed");
+            $('footer').css('display', "none");
+
+        }else{
+            //menuが開いている場合、閉じる
+            $('.menu_icon').removeClass('sp_menu_active');
+            $(this).find('.menu_text').text('MENU');
+            $('.header_inner').addClass('close');
+            
+
+            $('body').removeClass('on');
+            $('main').css('position', "relative");
+            $('footer').css('display', "flex");
+            scrollPosi = $('body').attr('data-scroll');
+            scrollPosi = Number(scrollPosi);
+            $(window).scrollTop(scrollPosi);
+        }
+
+
+         
+        $('.header_inner').fadeToggle(500);//表示・非表示切り替わる
+    })
+
+
+
+    $(window).on('resize',function() {//リサイズされたときの処理 
+        if($(window).width() > '750'){//pc
+            $('.header_inner').css('display','block');
+        
+        }else{//sp
+            //spメニュー調整
+            if($('.header_inner').hasClass('close')){//閉じている場合
+                $('.menu_icon').removeClass('sp_menu_active');
+                $(this).find('.menu_text').text('MENU');
+                $('.header_inner').css('display','none');
+            }else{
+                $('.menu_icon').addClass('sp_menu_active');
+                $(this).find('.menu_text').text('CLOSE');
+                $('.header_inner').css('display','block');
+            }
+            //
+        }
+    });
+
+
+});
+
+
+   
+
+</script>
+</html>

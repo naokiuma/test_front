@@ -40,6 +40,7 @@
 
     function test_function(){
         console.log("test");
+        document.addEventListener('mousewheel', noScroll, { passive: false });
     }
 
 
@@ -51,6 +52,17 @@
         //console.log(box)
     });
 
+    
+
+    function noScroll(event) {
+     event.preventDefault();
+   }
+
+
+
+
+
+    
     
 
     
